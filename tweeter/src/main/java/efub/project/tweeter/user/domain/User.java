@@ -1,5 +1,6 @@
 package efub.project.tweeter.user.domain;
 
+import efub.project.tweeter.tweet.global.domain.BaseEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,7 +31,7 @@ public class User {
     // 가입일
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime createdDate;
 
     // 사용자 비밀번호
     @Column(nullable = false)

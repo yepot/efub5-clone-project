@@ -8,14 +8,14 @@ public record UserResponseDto(
         Long userId,
         String username,
         String handle,
-        LocalDateTime createdAt
+        LocalDateTime createdDate
 ) {
     public static UserResponseDto from(User user){
         return new UserResponseDto(
                 user.getUserId(),
                 user.getUsername(),
                 user.getHandle(),
-                user.getCreatedAt()
+                user.getCreatedDate()
         );
     }
 }

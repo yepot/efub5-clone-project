@@ -1,5 +1,7 @@
 package efub.project.tweeter.user.service;
 
+import efub.project.tweeter.tweet.global.exception.dto.ExceptionCode;
+import efub.project.tweeter.tweet.global.exception.dto.TweetException;
 import efub.project.tweeter.user.domain.User;
 import efub.project.tweeter.user.dto.response.UserResponseDto;
 import efub.project.tweeter.user.repository.UserRepository;
@@ -21,5 +23,13 @@ public class UserService {
                 .orElseThrow(()->new IllegalArgumentException("해당 사용자를 찾을 수 없습니다."));
         return UserResponseDto.from(user);
     }
+
+    // 사용지 ID 찾기
+    @Transactional(readOnly = true)
+    public User findByUserId(Long userId){
+        return userRepository.findByUserId(userId)
+                .orElseThrow(()->new TweetException(ExceptionCode.USER_NOT_FOUND));
+    }
+
 
 }
