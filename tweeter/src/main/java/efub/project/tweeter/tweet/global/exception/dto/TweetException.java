@@ -10,11 +10,6 @@ public class TweetException extends RuntimeException {
         this.exceptionCode = exceptionCode;
     }
 
-    @Override
-    public String getMessage() {
-        return exceptionCode.getMessage();
-    }
-
     public HttpStatusCode getHttpStatusCode(){
         return exceptionCode.getHttpStatus();
     }

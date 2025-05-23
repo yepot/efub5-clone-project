@@ -37,4 +37,13 @@ public class TweetController {
     public ResponseEntity<TweetResponseDto> getTweet(@PathVariable("tweetId") Long tweetId){
         return ResponseEntity.ok(tweetService.getTweet(tweetId));
     }
+
+    // 트윗 삭제
+    @DeleteMapping("/{tweetId}")
+    public ResponseEntity<String> deleteTweet(@PathVariable("tweetId") Long tweetId,
+                                              @RequestHeader("Auth-Id") Long userId,
+                                              @RequestHeader("Auth-Password") String password){
+        tweetService.deleteTweet(tweetId, userId, password);
+        return ResponseEntity.ok("트윗이 성공적으로 삭제되었습니다.");
+    }
 }

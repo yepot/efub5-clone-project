@@ -53,7 +53,14 @@ public class TweetService {
         return TweetResponseDto.from(tweet);
     }
 
-
+    // 트윗 삭제
+    @Transactional
+    public void deleteTweet(Long tweetId, Long userId, String password){
+        Tweet tweet = findByTweetId(tweetId);
+        User user = findByUserId(userId);
+        authorizeTweetWriter(tweet, user, password);
+        tweetRepository.delete(tweet);
+    }
 
     @Transactional(readOnly = true)
     public Tweet findByTweetId(Long tweetId) {
@@ -65,6 +72,12 @@ public class TweetService {
     private User findByUserId(Long userId) {
         return userRepository.findByUserId(userId)
                 .orElseThrow(()->new TweetException(ExceptionCode.USER_NOT_FOUND));
+    }
+
+    private void authorizeTweetWriter(Tweet tweet, User user, String password) {
+        if(!tweet.getUser().equals(user) || !tweet.getUser().getPassword().equals(password)) {
+            throw new TweetException(ExceptionCode.TWEET_USER_MISMATCH);
+        }
     }
 
 }
