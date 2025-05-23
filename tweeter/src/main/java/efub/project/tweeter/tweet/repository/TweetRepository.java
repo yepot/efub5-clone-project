@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TweetRepository extends JpaRepository<Tweet, Long> {
+
     // tweetId로 tweet 찾기
     Optional<Tweet> findByTweetId(Long tweetId);
 

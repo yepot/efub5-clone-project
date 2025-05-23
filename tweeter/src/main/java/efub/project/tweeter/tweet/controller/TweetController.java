@@ -31,4 +31,10 @@ public class TweetController {
     public ResponseEntity<TweetListResponseDto> getAllTweet(){
         return ResponseEntity.ok(tweetService.getAllTweets());
     }
+
+    // 개별 트윗 조회
+    @GetMapping("/{tweetId}")
+    public ResponseEntity<TweetResponseDto> getTweet(@PathVariable("tweetId") Long tweetId){
+        return ResponseEntity.ok(tweetService.getTweet(tweetId));
+    }
 }
