@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/efub5-clone-project.iml" filepath="$PROJECT_DIR$/.idea/efub5-clone-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tweeter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/tweeter.main.iml" />
     </modules>
   </component>
 </project>

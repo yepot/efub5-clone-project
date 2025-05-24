@@ -1,17 +1,10 @@
 spring:
-  application:
-    name: tweeter
-
   datasource:
-    url: jdbc:mysql://localhost:3306/tweeter?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
-    username: root
-    password: mdmstj2395!
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+    url: jdbc:mysql://efub-tweeter.cbosoki4qqbu.ap-northeast-2.rds.amazonaws.com:3306/efubtweeter?createDatabaseIfNotExist=true&characterEncoding=UTF-8&characterSetResults=UTF-8
+    username: admin
+    password: mdmstj2395!
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+    generate-ddl:trueshow-sql:true
