@@ -38,7 +38,7 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          cd blog
+          cd tweeter
           chmod +x ./gradlew
           ./gradlew build -x test
 
