@@ -1,5 +1,5 @@
 #!/usr/bin/env bashPROJECT_ROOT="/home/ubuntu/{root_directory_name}"
-JAR_FILE="$PROJECT_ROOT/blog-webapp.jar"
+JAR_FILE="$PROJECT_ROOT/tweeter-0.0.1-SNAPSHOT.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
 ERROR_LOG="$PROJECT_ROOT/error.log"
