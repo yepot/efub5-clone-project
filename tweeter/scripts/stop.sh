@@ -1,4 +1,4 @@
-#!/usr/bin/env bashPROJECT_ROOT="/home/ubuntu/{root_directory_name}"
+#!/usr/bin/env bashPROJECT_ROOT="/home/ubuntu/tweeter"
 JAR_FILE="$PROJECT_ROOT/tweeter-0.0.1-SNAPSHOT.jar"
 
 DEPLOY_LOG="$PROJECT_ROOT/deploy.log"
