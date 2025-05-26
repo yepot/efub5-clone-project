@@ -1,4 +1,5 @@
 #!/usr/bin/env bashPROJECT_ROOT="/home/ubuntu/tweeter"
+
 JAR_FILE="$PROJECT_ROOT/tweeter-0.0.1-SNAPSHOT.jar"
 
 APP_LOG="$PROJECT_ROOT/application.log"
