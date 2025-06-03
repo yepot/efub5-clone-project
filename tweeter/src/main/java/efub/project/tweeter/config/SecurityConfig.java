@@ -18,7 +18,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS")
                 .allowedHeaders("*")
-                .allowCredentials(true)
+//                .allowCredentials(true)
                 .maxAge(3600);
     }
 }
