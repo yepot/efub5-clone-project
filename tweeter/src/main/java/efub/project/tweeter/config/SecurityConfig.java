@@ -2,6 +2,7 @@ package efub.project.tweeter.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,37 +19,34 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    // cors 설정
     @Bean
-    CorsConfigurationSource corsConfigurationSource() {
+    public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:5173",
-                "https://efub5-twitter-clone.vercel.app"));
-        configuration.setAllowedMethods(List.of("*"));
+                "https://efub5-twitter-clone.vercel.app"
+        ));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);  // withCredentials 대응
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable);
-        http.cors(corsConfigurer -> corsConfigurer.configurationSource(corsConfigurationSource()));
-        http.sessionManagement(
-                sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-        http.formLogin(AbstractHttpConfigurer::disable);
-        http.httpBasic(AbstractHttpConfigurer::disable);
-
-        http.authorizeHttpRequests(authorize -> authorize
-                .anyRequest().permitAll()
-        );
-
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()  // OPTIONS 프리플라이트 허용
+                        .anyRequest().permitAll()  // 모든 요청 허용
+                );
         return http.build();
     }
 }
