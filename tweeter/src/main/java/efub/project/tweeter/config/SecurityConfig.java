@@ -12,10 +12,11 @@ public class SecurityConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(
-                        "http://localhost:5173",
-                        "https://efub5-twitter-clone.vercel.app"
+                        "*" // 임시 허용
+//                        "http://localhost:5173",
+//                        "https://efub5-twitter-clone.vercel.app"
                 )
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(3600);
