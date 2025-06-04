@@ -55,9 +55,8 @@ public class TweetService {
 
     // 트윗 삭제
     @Transactional
-    public void deleteTweet(Long tweetId, User user){
+    public void deleteTweet(Long tweetId){
         Tweet tweet = findByTweetId(tweetId);
-        authorizeTweetWriter(tweet, user);
         tweetRepository.delete(tweet);
     }
 
@@ -73,11 +72,11 @@ public class TweetService {
                 .orElseThrow(()->new TweetException(ExceptionCode.USER_NOT_FOUND));
     }
 
-    // 작성자 권한 검사
-    private void authorizeTweetWriter(Tweet tweet, User user) {
-        if (!tweet.getUser().equals(user)) {
-            throw new TweetException(ExceptionCode.TWEET_USER_MISMATCH);
-        }
-    }
+//    // 작성자 권한 검사
+//    private void authorizeTweetWriter(Tweet tweet, User user) {
+//        if (!tweet.getUser().equals(user)) {
+//            throw new TweetException(ExceptionCode.TWEET_USER_MISMATCH);
+//        }
+//    }
 
 }
