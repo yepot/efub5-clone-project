@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 public record TweetResponseDto(
         Long tweetId,
+        Long userId,
         String username,
         String handle,
         String content,
@@ -15,6 +16,7 @@ public record TweetResponseDto(
     public static TweetResponseDto from(Tweet tweet){
         return new TweetResponseDto(
                 tweet.getTweetId(),
+                tweet.getUser().getUserId(),
                 tweet.getUser().getUsername(),
                 tweet.getUser().getHandle(),
                 tweet.getContent(),

@@ -4,6 +4,8 @@ import efub.project.tweeter.tweet.dto.request.TweetCreateRequestDto;
 import efub.project.tweeter.tweet.dto.response.TweetListResponseDto;
 import efub.project.tweeter.tweet.dto.response.TweetResponseDto;
 import efub.project.tweeter.tweet.service.TweetService;
+import efub.project.tweeter.user.domain.User;
+import efub.project.tweeter.user.repository.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.net.URI;
 public class TweetController {
 
     private final TweetService tweetService;
+    private final UserRepository userRepository;
 
     // 트윗 생성
     @PostMapping
@@ -41,9 +44,9 @@ public class TweetController {
     // 트윗 삭제
     @DeleteMapping("/{tweetId}")
     public ResponseEntity<String> deleteTweet(@PathVariable("tweetId") Long tweetId,
-                                              @RequestHeader("Auth-Id") Long userId,
-                                              @RequestHeader("Auth-Password") String password){
-        tweetService.deleteTweet(tweetId, userId, password);
+                                              @RequestHeader("Auth-Id") Long userId){
+        User user = userRepository.getReferenceById(userId);
+        tweetService.deleteTweet(tweetId, user);
         return ResponseEntity.ok("트윗이 성공적으로 삭제되었습니다.");
     }
 }
